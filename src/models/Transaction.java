@@ -6,12 +6,11 @@ import java.util.UUID;
 public class Transaction {
 
     private UUID transactionId;
-
     private Date date;
-
     private int amount;
-
     private TransactionTypes transactionType;
+    private UUID originatorBankAccountId;
+    private UUID targetBankAccountId;
 
     public UUID getTransactionId() {
         return transactionId;
@@ -45,11 +44,15 @@ public class Transaction {
         this.targetBankAccountId = targetBankAccountId;
     }
 
-    private UUID originatorBankAccountId;
-    private UUID targetBankAccountId;
+    public int getAmount() {
+        return amount;
+    }
 
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
 
-    public Transaction(TransactionTypes transactionType, int amount, UUID originatorBankAccountId, UUID targetBankAccountId) {
+    Transaction(TransactionTypes transactionType, int amount, UUID originatorBankAccountId, UUID targetBankAccountId) {
         this.transactionId = UUID.randomUUID();
         this.transactionType = transactionType;
         this.originatorBankAccountId = originatorBankAccountId;
@@ -58,13 +61,6 @@ public class Transaction {
         this.date = new Date(System.currentTimeMillis());
     }
 
-    public int getAmount() {
-        return amount;
-    }
-
-    public void setAmount(int amount) {
-        this.amount = amount;
-    }
 
     @Override
     public String toString() {

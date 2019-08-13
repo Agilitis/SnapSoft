@@ -6,9 +6,7 @@ import java.util.stream.Collectors;
 
 public class TransactionHistory {
 
-    public List<Transaction> getTransactions() {
-        return transactions;
-    }
+
 
     private List<Transaction> transactions;
     private static TransactionHistory instance;
@@ -20,8 +18,12 @@ public class TransactionHistory {
         return instance;
     }
 
-    public void addTransaction(Transaction transaction) {
+    void addTransaction(Transaction transaction) {
         transactions.add(transaction);
+    }
+
+    public List<Transaction> getTransactions() {
+        return transactions;
     }
 
     public List<Transaction> getTransactionsForUser(User user) {
