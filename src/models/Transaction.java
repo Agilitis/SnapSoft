@@ -1,10 +1,13 @@
 package models;
 
+import java.util.Date;
 import java.util.UUID;
 
 public class Transaction {
 
     private UUID transactionId;
+
+    private Date date;
 
     private int amount;
 
@@ -52,6 +55,7 @@ public class Transaction {
         this.originatorBankAccountId = originatorBankAccountId;
         this.targetBankAccountId = targetBankAccountId;
         this.amount = amount;
+        this.date = new Date(System.currentTimeMillis());
     }
 
     public int getAmount() {
