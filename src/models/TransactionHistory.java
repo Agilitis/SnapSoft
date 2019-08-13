@@ -1,17 +1,21 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
-import java.util.stream.Stream;
+import java.util.stream.Collectors;
 
 public class TransactionHistory {
+
+    public List<Transaction> getTransactions() {
+        return transactions;
+    }
 
     private List<Transaction> transactions;
     private static TransactionHistory instance;
 
     public static TransactionHistory getInstance() {
         if(instance == null){
-            return new TransactionHistory();
+            instance = new TransactionHistory();
         }
         return instance;
     }
@@ -20,11 +24,14 @@ public class TransactionHistory {
         transactions.add(transaction);
     }
 
-    public Stream<Transaction> getTransactionsForUserByBankAccount(UUID bankAccount) {
+    public List<Transaction> getTransactionsForUser(User user) {
         return transactions.stream()
-                .filter(s -> s.getOriginatorBankAccountId().equals(bankAccount));
+                .filter(s -> s.getOriginatorBankAccountId().equals(user.getBankAccountNumber()))
+                .collect(Collectors.toList());
 
     }
 
-    private TransactionHistory(){}
+    private TransactionHistory(){
+        transactions = new ArrayList<>();
+    }
 }

@@ -6,6 +6,10 @@ import java.util.UUID;
 
 public class User {
 
+    public UUID getBankAccountNumber() {
+        return bankAccountNumber;
+    }
+
     private UUID bankAccountNumber;
 
     // This can be calculated from transactions, so there is some redundance but this is faster
@@ -26,7 +30,7 @@ public class User {
     }
 
     public void withdrawMoney(int amount) throws BankError {
-        if (this.currentBalance - amount <= 0) {
+        if (this.currentBalance - amount < 0) {
             throw new BankError("Insufficient money");
         }
         //Save transaction
@@ -46,16 +50,18 @@ public class User {
         currentBalance += amount;
     }
 
-    public void transferMoney(UUID targetAccount, int amount) throws BankError{
-        if (this.currentBalance - amount <= 0) {
+    public void transferMoney(User targetUser, int amount) throws BankError{
+        if (this.currentBalance - amount < 0) {
             throw new BankError("Insufficient money");
         }
 
         //Save transaction
-        Transaction transaction = new Transaction(TransactionTypes.TRANSFER, amount, this.bankAccountNumber, targetAccount);
+        Transaction transaction = new Transaction(TransactionTypes.TRANSFER, amount, this.bankAccountNumber, targetUser.getBankAccountNumber());
         TransactionHistory.getInstance().addTransaction(transaction);
 
         //Do the job
+        this.currentBalance -= amount;
+        targetUser.setCurrentBalance(targetUser.getCurrentBalance() + amount);
 
     }
 }
