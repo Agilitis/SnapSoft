@@ -58,11 +58,12 @@ public class Main {
 
 
     static void  printMenu(){
-        System.out.println("1. Get current balance");
-        System.out.println("2. Withdraw money");
-        System.out.println("3. Deposit money");
-        System.out.println("4. Transfer money");
-        System.out.println("5. My transaction history");
-        System.out.println("9. Exit");
+        var logger = LoggerFactory.getLogger(LoggerTypes.CONSOLE);
+        logger.LogUser("1. Get current balance");
+        logger.LogUser("2. Withdraw money");
+        logger.LogUser("3. Deposit money");
+        logger.LogUser("4. Transfer money");
+        logger.LogUser("5. My transaction history");
+        logger.LogUser("9. Exit");
     }
 }
