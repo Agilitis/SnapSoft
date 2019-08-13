@@ -17,4 +17,9 @@ public class ConsoleLogger extends AbstractLogger {
     public void LogError(String message) {
         System.err.println("ERROR: " + message);
     }
+
+    @Override
+    public void LogUser(String message) {
+        System.out.println(message);
+    }
 }

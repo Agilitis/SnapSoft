@@ -65,4 +65,9 @@ public class Transaction {
     public void setAmount(int amount) {
         this.amount = amount;
     }
+
+    @Override
+    public String toString() {
+        return "Date: " + this.date.toString() + " To: " + this.targetBankAccountId + " Amount: " + this.amount;
+    }
 }
