@@ -28,9 +28,23 @@ public class TransactionHistory {
 
     public List<Transaction> getTransactionsForUser(User user) {
         return transactions.stream()
-                .filter(s -> s.getOriginatorBankAccountId().equals(user.getBankAccountNumber()))
+                .filter(s -> s.getOriginatorBankAccountId().equals(user.getBankAccountNumber()) || s.getTargetBankAccountId().equals(user.getBankAccountNumber()))
                 .collect(Collectors.toList());
 
+    }
+
+    public List<Transaction> getWithdrawalsForUser(User user) {
+        return transactions.stream()
+                .filter(s -> s.getOriginatorBankAccountId().equals(user.getBankAccountNumber()))
+                .filter(s -> s.getTransactionType().equals(TransactionTypes.WITHDRAWAL))
+                .collect(Collectors.toList());
+    }
+
+    public List<Transaction> getDepositsForUser(User user) {
+        return transactions.stream()
+                .filter(s -> s.getOriginatorBankAccountId().equals(user.getBankAccountNumber()))
+                .filter(s -> s.getTransactionType().equals(TransactionTypes.DEPOSIT))
+                .collect(Collectors.toList());
     }
 
     private TransactionHistory(){

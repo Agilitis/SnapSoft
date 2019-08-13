@@ -64,6 +64,6 @@ public class Transaction {
 
     @Override
     public String toString() {
-        return "Date: " + this.date.toString() + " To: " + this.targetBankAccountId + " Amount: " + this.amount;
+        return "Date: " + this.date.toString() + " To: " + this.targetBankAccountId + " Amount: " + this.amount + " Type: " + this.transactionType;
     }
 }

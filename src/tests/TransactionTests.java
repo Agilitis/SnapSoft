@@ -36,9 +36,10 @@ public class TransactionTests {
     @Test
     public void getUserTransfersTest(){
         List<Transaction> transactions = TransactionHistory.getInstance().getTransactionsForUser(mockedOriginatorUser);
-        Assert.assertEquals(3, transactions.size());
+        Assert.assertEquals(4, transactions.size());
         for (var transaction : transactions){
-            Assert.assertEquals(mockedOriginatorUser.getBankAccountNumber(), transaction.getOriginatorBankAccountId());
+            Assert.assertTrue(mockedOriginatorUser.getBankAccountNumber().equals(transaction.getOriginatorBankAccountId()) ||
+                    mockedOriginatorUser.getBankAccountNumber().equals(transaction.getTargetBankAccountId()));
         }
     }
 
